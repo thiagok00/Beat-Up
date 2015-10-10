@@ -86,6 +86,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Tap Cube"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

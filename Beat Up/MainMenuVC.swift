@@ -25,7 +25,10 @@ class MainMenuVC: UIViewController {
     var gcEnabled = Bool()
     var gcDefaultLeaderBoard = String()
     
-    
+    let dataFromUser = UserDataDAO.loadUserData()
+
+    let muteButton = UIButton()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,8 +187,16 @@ class MainMenuVC: UIViewController {
         
         //MUTE BUTTON
         
-        let muteButton = UIButton()
-        let imgMute = UIImage(named: "Info Button")
+        
+        let str:String
+        if dataFromUser.soundON {
+            str = "musicON"
+        }
+        else {
+            str = "musicOFF"
+        }
+        
+        let imgMute = UIImage(named: str)
         
         muteButton.frame = CGRectMake(0, 0, imgMute!.size.width, imgMute!.size.height)
         
@@ -198,7 +209,7 @@ class MainMenuVC: UIViewController {
         //TUTORIAL BUTTON
         
         let tutorialButton = UIButton()
-        let imgTutorial = UIImage(named: "Info Button")
+        let imgTutorial = UIImage(named: "tutorialButton")
         
         tutorialButton.frame = CGRectMake(0, 0, imgTutorial!.size.width, imgTutorial!.size.height)
         tutorialButton.center.x = self.view.center.x * 1/2
@@ -217,8 +228,6 @@ class MainMenuVC: UIViewController {
     
     func GoTutorial(sender: UIButton!) {
         
-        let dataFromUser = UserDataDAO.loadUserData()
-        
         if (!clicou) {
             clicou = true
             
@@ -236,13 +245,15 @@ class MainMenuVC: UIViewController {
     func MuteSound(sender: UIButton!) {
     
         
-        let dataFromUser = UserDataDAO.loadUserData()
-        
+
         if dataFromUser.soundON == true {
             dataFromUser.soundON = false
+            muteButton.setImage(UIImage(named: "musicOFF"), forState:  UIControlState.Normal)
         }
         else {
             dataFromUser.soundON = true
+            muteButton.setImage(UIImage(named: "musicON"), forState:  UIControlState.Normal)
+
         }
         
         UserDataDAO.salva(dataFromUser)
