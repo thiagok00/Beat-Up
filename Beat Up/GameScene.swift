@@ -73,7 +73,8 @@ class GameScene: SKScene, FibbyDelegate {
         
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         /* Called when a touch begins */
     
@@ -83,7 +84,7 @@ class GameScene: SKScene, FibbyDelegate {
             
             if (node.name == "fibby") {
             
-                var fibby = node as! Fibby
+                let fibby = node as! Fibby
             
                 if (fibby.state == States.Active) {
                     
@@ -126,7 +127,7 @@ class GameScene: SKScene, FibbyDelegate {
     
         var fibbySize = CGSizeMake(screenWidth/4,screenWidth/4)
 
-        var index = 0
+       //var index = 0
         
 
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
@@ -150,7 +151,7 @@ class GameScene: SKScene, FibbyDelegate {
             for var j = 0 ; j < 3 ; j++ {
             
             
-                var fibby = Fibby.create(fibbySize, position:CGPointMake(x,y))
+                let fibby = Fibby.create(fibbySize, position:CGPointMake(x,y))
                 fibby.delegate = self
                 
                 if(dataFromUser.soundON == false) {
@@ -183,12 +184,12 @@ class GameScene: SKScene, FibbyDelegate {
         self.removeAllActions()
     
         
-        var wait = SKAction.waitForDuration(delay)
-        var waitmin = SKAction.waitForDuration(delay/2)
-        var spawn = SKAction.runBlock({ self.randomActiveFibby()})
+        let wait = SKAction.waitForDuration(delay)
+        let waitmin = SKAction.waitForDuration(delay/2)
+        let spawn = SKAction.runBlock({ self.randomActiveFibby()})
         //var delayBetweenAction = SKAction.waitForDuration(delay, withRange: 0.1)
         
-        var active = SKAction.sequence([spawn,waitmin,spawn,wait])
+        let active = SKAction.sequence([spawn,waitmin,spawn,wait])
 
         self.runAction(SKAction.repeatActionForever(active))
 
@@ -197,9 +198,9 @@ class GameScene: SKScene, FibbyDelegate {
     private func randomActiveFibby() {
         
         if (inactivatedFibbies.count > 0) {
-            var max = inactivatedFibbies.count-1
+            let max = inactivatedFibbies.count-1
             let random = Int.random(0...max)
-            var fibby = inactivatedFibbies[random]
+            let fibby = inactivatedFibbies[random]
             
             
             let randomPercentage = Int.random(0...100)
@@ -220,10 +221,10 @@ class GameScene: SKScene, FibbyDelegate {
     
     private func gameOver() {
  
-        var oldHighscore = dataFromUser.highscore as Int
+        let oldHighscore = dataFromUser.highscore as Int
         
         if (score > oldHighscore) {
-            var newHighscore = NSNumber(integer: score)
+            let newHighscore = NSNumber(integer: score)
             dataFromUser.highscore = newHighscore
         }
         
@@ -235,7 +236,7 @@ class GameScene: SKScene, FibbyDelegate {
         newTotalScore = newTotalScore + score
         dataFromUser.totalScore = newTotalScore
         
-        var newAverageScore = newTotalScore / newTotalGamesPlayed
+        let newAverageScore = newTotalScore / newTotalGamesPlayed
         dataFromUser.averageScorePerGame = NSNumber(integer: newAverageScore)
         
         UserDataDAO.salva(dataFromUser)
@@ -349,7 +350,7 @@ class GameScene: SKScene, FibbyDelegate {
                 return
             }
             
-            var fibby = self.allFibbies[sequences[i].value]
+            let fibby = self.allFibbies[sequences[i].value]
             if (fibby.state == States.Inactive) {
                 activeFibby(fibby, withDuration: duration)
             }
@@ -367,21 +368,20 @@ class GameScene: SKScene, FibbyDelegate {
     private func activeSequence() {
         
         self.removeAllActions()
-        var wait = SKAction.waitForDuration(1)
+        let wait = SKAction.waitForDuration(1)
         self.runAction(wait, completion: {self.runRandomSequence(0)})
     }
     
     func playBackgroundMusic(filename: String) {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
         if (url == nil) {
-            println("Could not find file: \(filename)")
+            print("Could not find file: \(filename)")
             return
         }
         
-        var error: NSError? = nil
-        backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
+        backgroundMusicPlayer = try! AVAudioPlayer(contentsOfURL: url!)
         if self.backgroundMusicPlayer == nil {
-            println("Could not create audio player: \(error!)")
+            print("Could not create audio player")
             return
         }
         

@@ -25,19 +25,33 @@ extension Int
         return Int(mini + arc4random_uniform(maxi - mini)) - offset
     }
 }
-extension Array {
-    mutating func removeObject<U: Equatable>(object: U) {
-        var index: Int?
-        for (idx, objectToCompare) in enumerate(self) {
-            if let to = objectToCompare as? U {
-                if object == to {
-                    index = idx
-                }
-            }
+//extension Array {
+//    mutating func removeObject<U: Equatable>(object: U) {
+//        var index: Int?
+//        for (idx, objectToCompare) in enumerate(self) {
+//            if let to = objectToCompare as? U {
+//                if object == to {
+//                    index = idx
+//                }
+//            }
+//        }
+//        
+//        if(index != nil) {
+//            self.removeAtIndex(index!)
+//        }
+//    }
+//}
+// Swift 2 Array Extension
+extension Array where Element: Equatable {
+    mutating func removeObject(object: Element) {
+        if let index = self.indexOf(object) {
+            self.removeAtIndex(index)
         }
-        
-        if(index != nil) {
-            self.removeAtIndex(index!)
+    }
+    
+    mutating func removeObjectsInArray(array: [Element]) {
+        for object in array {
+            self.removeObject(object)
         }
     }
 }

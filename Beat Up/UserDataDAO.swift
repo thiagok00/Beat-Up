@@ -12,38 +12,42 @@ import Foundation
 class UserDataDAO {
 
     class func pathFromPlist() ->String {
-    
-        var rootPath:NSString = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
-        var path:NSString = rootPath.stringByAppendingPathComponent("UserDataList2.plist")
+        let rootPath: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+        let plistPath = rootPath.stringByAppendingString("/UserDataList2.plist")
+        let fileManager: NSFileManager = NSFileManager.defaultManager()
         
-        var fileManager = NSFileManager.defaultManager()
-        
-        // Se o arquivo nao existir
-        if (!fileManager.fileExistsAtPath(path as String)) {
+        if !fileManager.fileExistsAtPath(plistPath) {
             
-            var sourcePath:NSString = NSBundle.mainBundle().pathForResource("UserDataList2", ofType: "plist")!;
-            fileManager.copyItemAtPath(sourcePath as String, toPath: path as String, error: nil)
-            return "ERROR"
+            let bundlePath: String? = NSBundle.mainBundle().pathForResource("UserDataList2", ofType: "plist")
+            
+            if let bundle = bundlePath {
+                do {
+                    try fileManager.copyItemAtPath(bundle, toPath: plistPath)
+                }
+                catch let error as NSError {
+                    print("Erro ao copiar UserDataList2.plist do mainBundle para plistPath: \(error.description)")
+                }
+            }
+            else {
+                print("UserDataList2.plist não está no mainBundle")
+            }
         }
-
-        return path as String
+        return plistPath
     }
-    
-    
     
     class func salva(dataFromUser:UserData)  {
         
         
-        var path = self.pathFromPlist()
+        let path = self.pathFromPlist()
         if (path == "ERROR") {
             return
         }
         
 
         
-        var dictionary = ["Highscore":dataFromUser.highscore, "TotalGames":dataFromUser.totalGamesPlayed,"TotalScore":dataFromUser.totalScore,"AverageScore":dataFromUser.averageScorePerGame,"Tutorial":dataFromUser.tutorial, "SoundON":dataFromUser.soundON]
+        let dictionary = ["Highscore":dataFromUser.highscore, "TotalGames":dataFromUser.totalGamesPlayed,"TotalScore":dataFromUser.totalScore,"AverageScore":dataFromUser.averageScorePerGame,"Tutorial":dataFromUser.tutorial, "SoundON":dataFromUser.soundON]
         
-        var array:NSMutableArray = NSMutableArray()
+        let array:NSMutableArray = NSMutableArray()
         
         array.addObject(dictionary)
         
@@ -54,20 +58,20 @@ class UserDataDAO {
     class func loadUserData() ->UserData {
     
         
-        var path = self.pathFromPlist()
+        let path = self.pathFromPlist()
         if (path == "ERROR") {
-            var newData = UserData()
+            let newData = UserData()
             return newData
         }
         
 
         
-        var dictsArray = NSMutableArray(contentsOfFile: path)
+        let dictsArray = NSMutableArray(contentsOfFile: path)
 
-        var data:UserData = UserData()
+        let data:UserData = UserData()
     
         if (dictsArray?.count == 1) {
-            var dict = dictsArray?.objectAtIndex(0) as! NSDictionary
+            let dict = dictsArray?.objectAtIndex(0) as! NSDictionary
             
             data.highscore = dict.objectForKey("Highscore") as! NSNumber
             data.totalGamesPlayed = dict.objectForKey("TotalGames") as! NSNumber

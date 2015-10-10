@@ -37,29 +37,29 @@ class MainMenuVC: UIViewController {
         // 2
         let boxGeometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 1.0)
         
-        var greenMaterial = SCNMaterial()
+        let greenMaterial = SCNMaterial()
         greenMaterial.diffuse.contents = UIColor(red: 120/255, green: 219/255, blue: 48/255, alpha: 1)
         greenMaterial.locksAmbientWithDiffuse = true
         
         
-        var redMaterial = SCNMaterial()
+        let redMaterial = SCNMaterial()
         redMaterial.diffuse.contents = UIColor(red: 236/255, green: 28/255, blue: 36/255, alpha: 1)
         redMaterial.locksAmbientWithDiffuse = true
         
-        var blueMaterial = SCNMaterial()
+        let blueMaterial = SCNMaterial()
         blueMaterial.diffuse.contents = UIColor(red: 85/255, green: 197/255, blue: 246/255, alpha: 1)
         blueMaterial.locksAmbientWithDiffuse = true
         
-        var yellowMaterial = SCNMaterial()
+        let yellowMaterial = SCNMaterial()
         yellowMaterial.diffuse.contents = UIColor.yellowColor()
         yellowMaterial.locksAmbientWithDiffuse = true
         
         
-        var orangeMaterial = SCNMaterial()
+        let orangeMaterial = SCNMaterial()
         orangeMaterial.diffuse.contents = UIColor(red: 252/255, green: 162/255, blue: 38/255, alpha: 1)
         orangeMaterial.locksAmbientWithDiffuse = true
         
-        var magentaMaterial = SCNMaterial()
+        let magentaMaterial = SCNMaterial()
         magentaMaterial.diffuse.contents = UIColor(red: 161/255, green: 36/255, blue: 160, alpha: 1)
         magentaMaterial.locksAmbientWithDiffuse = true
         
@@ -101,7 +101,7 @@ class MainMenuVC: UIViewController {
         
         // Add title text
         
-        var label = UILabel()
+        let label = UILabel()
         label.text = "Tap"
         label.frame = CGRectMake(0, 0, self.view.frame.size.width/0.8, self.view.frame.size.height/5.68)
         label.center.x = self.view.center.x
@@ -119,7 +119,7 @@ class MainMenuVC: UIViewController {
         //Add cube text
        
         
-        var cubeLabel = UILabel()
+        let cubeLabel = UILabel()
         cubeLabel.text = "Cube"
         cubeLabel.frame = CGRectMake(0, 0, self.view.frame.size.width/0.8, self.view.frame.size.height/5.68)
         cubeLabel.center.x = self.view.center.x
@@ -137,7 +137,7 @@ class MainMenuVC: UIViewController {
         
         // "to play" label
         
-        var toplayLabel = UILabel()
+        let toplayLabel = UILabel()
         toplayLabel.text = "to play"
         toplayLabel.frame = CGRectMake(self.view.frame.size.width/8.2, self.view.frame.size.height/1.62, self.view.frame.size.width/0.8, self.view.frame.size.height/5.68)
     
@@ -156,7 +156,7 @@ class MainMenuVC: UIViewController {
         
         // Add UIButton to play
         
-        var playButton = UIButton()
+        let playButton = UIButton()
         playButton.frame = CGRectMake(0, 0, self.view.frame.size.width * 0.625, self.view.frame.size.width * 0.625)
 
         
@@ -171,7 +171,7 @@ class MainMenuVC: UIViewController {
         
         //ADD info Button
         
-        var infoButton = UIButton()
+        let infoButton = UIButton()
         let img = UIImage(named: "Info Button")
         
         infoButton.frame = CGRectMake(0, 0, img!.size.width, img!.size.height)
@@ -184,7 +184,7 @@ class MainMenuVC: UIViewController {
         
         //MUTE BUTTON
         
-        var muteButton = UIButton()
+        let muteButton = UIButton()
         let imgMute = UIImage(named: "Info Button")
         
         muteButton.frame = CGRectMake(0, 0, imgMute!.size.width, imgMute!.size.height)
@@ -197,7 +197,7 @@ class MainMenuVC: UIViewController {
         
         //TUTORIAL BUTTON
         
-        var tutorialButton = UIButton()
+        let tutorialButton = UIButton()
         let imgTutorial = UIImage(named: "Info Button")
         
         tutorialButton.frame = CGRectMake(0, 0, imgTutorial!.size.width, imgTutorial!.size.height)
@@ -217,7 +217,7 @@ class MainMenuVC: UIViewController {
     
     func GoTutorial(sender: UIButton!) {
         
-        var dataFromUser = UserDataDAO.loadUserData()
+        let dataFromUser = UserDataDAO.loadUserData()
         
         if (!clicou) {
             clicou = true
@@ -236,7 +236,7 @@ class MainMenuVC: UIViewController {
     func MuteSound(sender: UIButton!) {
     
         
-        var dataFromUser = UserDataDAO.loadUserData()
+        let dataFromUser = UserDataDAO.loadUserData()
         
         if dataFromUser.soundON == true {
             dataFromUser.soundON = false
@@ -251,14 +251,13 @@ class MainMenuVC: UIViewController {
     func playBackgroundMusic(filename: String) {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
         if (url == nil) {
-            println("Could not find file: \(filename)")
+            print("Could not find file: \(filename)")
             return
         }
         
-        var error: NSError? = nil
-        backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
+        backgroundMusicPlayer = try! AVAudioPlayer(contentsOfURL: url!)
         if self.backgroundMusicPlayer == nil {
-            println("Could not create audio player: \(error!)")
+            print("Could not create audio player")
             return
         }
         
@@ -294,18 +293,18 @@ class MainMenuVC: UIViewController {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+            return UIInterfaceOrientationMask.AllButUpsideDown
         } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
+            return UIInterfaceOrientationMask.All
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
-        println("receive memory warning")
+        print("receive memory warning")
     }
     
     //game center function
@@ -316,27 +315,32 @@ class MainMenuVC: UIViewController {
         localPlayer.authenticateHandler = {(GameViewController, error) -> Void in
             
             if ((GameViewController) != nil) {
-                self.presentViewController(GameViewController, animated: true, completion: nil)
+                self.presentViewController(GameViewController!, animated: true, completion: nil)
             }
             else if (localPlayer.authenticated) {
-                println("Ta autenticado game center ")
+                print("Ta autenticado game center ")
                 self.gcEnabled = true
                 
                 //get the default leaderboard id
-                localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderBoardIdentifier: String!, error: NSError!) -> Void in
+//                localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({ (leaderBoardIdentifier: String!, error: NSError!) -> Void in
+//                    if error != nil {
+//                        print(error)
+//                    }
+//                    else {
+//                        self.gcDefaultLeaderBoard = leaderBoardIdentifier
+//                    }
+//                })
+                localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler({(leaderBoardIdentifier: String?, error: NSError?) -> Void in
                     if error != nil {
-                        println(error)
-                    }
-                    else {
-                        self.gcDefaultLeaderBoard = leaderBoardIdentifier
+                        print(error)
                     }
                 })
                 
             }
             else {
                 self.gcEnabled = false;
-                println("Deu ruim no game center, desabilitando...")
-                println(error)
+                print("Deu ruim no game center, desabilitando...")
+                print(error)
             }
         }
     }

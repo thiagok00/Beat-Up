@@ -23,8 +23,10 @@ class GameViewController: UIViewController {
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
-        var userData = UserDataDAO.loadUserData()
+        let userData = UserDataDAO.loadUserData()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "quitToLevel:", name: "quitToLevelID", object: nil)
+        self.view.multipleTouchEnabled = true
+        
         
         if (userData.tutorial == 1) {
             let scene = GameScene(size: skView.bounds.size)
@@ -53,12 +55,12 @@ class GameViewController: UIViewController {
         
         self.dismissViewControllerAnimated(false, completion: nil)
     }
-    
-    override func supportedInterfaceOrientations() -> Int {
+
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+            return (UIInterfaceOrientationMask.AllButUpsideDown)
         } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
+            return (UIInterfaceOrientationMask.All)
         }
     }
 
@@ -74,7 +76,7 @@ class GameViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
-        println("Receveid memory warning.")
+        print("Receveid memory warning.")
     }
 
     

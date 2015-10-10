@@ -27,13 +27,12 @@ class Tutorial: SKScene {
         
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {        
         if (self.index < 5 ) {
             
             if (!self.clicked) {
                 
-                var fade = SKAction.fadeOutWithDuration(0.5)
+                let fade = SKAction.fadeOutWithDuration(0.5)
                 self.clicked = true
                 img.runAction(fade, completion: {
                     
@@ -59,7 +58,7 @@ class Tutorial: SKScene {
     
     private func quitTutorial() {
         
-        var dataFromUser = UserDataDAO.loadUserData()
+        let dataFromUser = UserDataDAO.loadUserData()
         
         if (dataFromUser.tutorial == -1) {
             

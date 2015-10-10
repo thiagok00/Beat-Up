@@ -13,7 +13,7 @@ class SequenceGenerator: NSObject {
     
     func generateRandomSequence () -> [Sequence] {
         
-        var randomNumb = Int.random(0...5)
+        let randomNumb = Int.random(0...5)
 
         if (randomNumb == 0) {
             return self.T_sequence()
@@ -134,7 +134,7 @@ class SequenceGenerator: NSObject {
         var seq:Sequence
 
         
-        var randomInitial = Int.random(0...1)
+        let randomInitial = Int.random(0...1)
 
         if (randomInitial == 0) {
         for (var inicial = 9; inicial >= 0 ; inicial = inicial - 3) {

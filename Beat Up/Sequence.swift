@@ -17,7 +17,7 @@ class Sequence: NSObject {
     
     class func create(value:Int, duration:Double)->Sequence {
     
-        var seq = Sequence()
+        let seq = Sequence()
         seq.duration = duration
         seq.value = value
 

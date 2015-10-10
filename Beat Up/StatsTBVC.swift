@@ -38,7 +38,8 @@ class StatsTBVC: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
- var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("celula", forIndexPath: indexPath) as! UITableViewCell
+
+        let cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("celula", forIndexPath: indexPath)
 
         // Configure the cell...
         cell.backgroundColor = UIColor.blackColor()
