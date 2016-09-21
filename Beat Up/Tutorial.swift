@@ -36,7 +36,7 @@ class Tutorial: SKScene {
                 self.clicked = true
                 img.runAction(fade, completion: {
                     
-                    self.index++
+                    self.index += 1
                     self.clicked = false
                     self.img.runAction(SKAction.fadeInWithDuration(0))
                     self.mudaImg()

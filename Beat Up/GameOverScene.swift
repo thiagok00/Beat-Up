@@ -149,6 +149,7 @@ class GameOverScene: SKScene {
             let node = self.nodeAtPoint(location)
             
             if (node.name == "Replay Button" || node.name == "Replay Label") {
+                
                 self.JogaDeNovo()
             }
             else if ( node.name == "Main Menu Button" || node.name == "Main Menu Label") {
@@ -191,7 +192,8 @@ class GameOverScene: SKScene {
     
     private func JogaDeNovo() {
     
-    
+        NSNotificationCenter.defaultCenter().postNotificationName("LoadAd", object: nil)
+
         let transition = SKTransition.fadeWithDuration(1.5)
         
         let scene = GameScene(size:self.frame.size)

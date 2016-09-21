@@ -9,10 +9,12 @@
 import UIKit
 import SpriteKit
 import GameKit
+import GoogleMobileAds
 
+class GameViewController: UIViewController, GADInterstitialDelegate, UIAlertViewDelegate {
 
-class GameViewController: UIViewController {
-
+    var interstitial: GADInterstitial?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,8 +26,12 @@ class GameViewController: UIViewController {
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
         let userData = UserDataDAO.loadUserData()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "quitToLevel:", name: "quitToLevelID", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.quitToLevel(_:)), name: "quitToLevelID", object: nil)
         self.view.multipleTouchEnabled = true
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.showInterstitial), name: "ShowAd", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameViewController.loadInterstitial), name: "LoadAd", object: nil)
+
+        loadInterstitial()
         
         
         if (userData.tutorial == 1) {
@@ -42,10 +48,45 @@ class GameViewController: UIViewController {
             skView.presentScene(scene)
         }
 
-
+        
         
     }
+    
+    func showInterstitial() {
+        if (interstitial!.isReady) {
+            interstitial!.presentFromRootViewController(self)
+        } else {
+            UIAlertView(title: "Interstitial not ready",
+                message: "The interstitial didn't finish loading or failed to load",
+                delegate: self,
+                cancelButtonTitle: "Drat").show()
+        }
+    }
+    
+    func loadInterstitial() {
+        if interstitial != nil {return}
+        
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3256183457519570/5940964046")
+        interstitial!.delegate = self
+        
+        // Request test ads on devices you specify. Your test device ID is printed to the console when
+        // an ad request is made. GADInterstitial automatically returns test ads when running on a
+        // simulator.
+        interstitial!.loadRequest(GADRequest())
+    }
 
+    func interstitialDidFailToReceiveAdWithError (
+        interstitial: GADInterstitial,
+        error: GADRequestError) {
+            print("interstitialDidFailToReceiveAdWithError: %@" + error.localizedDescription)
+    }
+    
+    func interstitialDidDismissScreen (interstitial: GADInterstitial) {
+        print("interstitialDidDismissScreen")
+        self.interstitial = nil
+    }
+    
+    
     override func shouldAutorotate() -> Bool {
         return true
     }

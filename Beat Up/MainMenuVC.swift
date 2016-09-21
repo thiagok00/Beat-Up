@@ -168,7 +168,7 @@ class MainMenuVC: UIViewController {
         
         playButton.center.x = self.view.center.x
         playButton.center.y = self.view.frame.size.height/2.5
-        playButton.addTarget(self, action: Selector("PlayAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        playButton.addTarget(self, action: #selector(MainMenuVC.PlayAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(playButton)
         
@@ -181,7 +181,7 @@ class MainMenuVC: UIViewController {
         
         infoButton.center.x = self.view.center.x
         infoButton.center.y = self.view.frame.size.height*0.9
-        infoButton.addTarget(self, action: Selector("StatsAction:"), forControlEvents: UIControlEvents.TouchUpInside)
+        infoButton.addTarget(self, action: #selector(MainMenuVC.StatsAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         infoButton.setImage(img, forState:  UIControlState.Normal)
         self.view.addSubview(infoButton)
         
@@ -202,7 +202,7 @@ class MainMenuVC: UIViewController {
         
         muteButton.center.x = self.view.center.x * 3/2
         muteButton.center.y = self.view.frame.size.height*0.9
-        muteButton.addTarget(self, action: Selector("MuteSound:"), forControlEvents: UIControlEvents.TouchUpInside)
+        muteButton.addTarget(self, action: #selector(MainMenuVC.MuteSound(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         muteButton.setImage(imgMute, forState:  UIControlState.Normal)
         self.view.addSubview(muteButton)
         
@@ -214,7 +214,7 @@ class MainMenuVC: UIViewController {
         tutorialButton.frame = CGRectMake(0, 0, imgTutorial!.size.width, imgTutorial!.size.height)
         tutorialButton.center.x = self.view.center.x * 1/2
         tutorialButton.center.y = self.view.frame.size.height*0.9
-        tutorialButton.addTarget(self, action: Selector("GoTutorial:"), forControlEvents: UIControlEvents.TouchUpInside)
+        tutorialButton.addTarget(self, action: #selector(MainMenuVC.GoTutorial(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         tutorialButton.setImage(imgTutorial, forState:  UIControlState.Normal)
         self.view.addSubview(tutorialButton)
         

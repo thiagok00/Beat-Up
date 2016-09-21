@@ -46,7 +46,7 @@ class Fibby: SKSpriteNode {
         fibby.size = size
         fibby.name = "fibby"
     
-        for var i = 0; i < 20; i++ {
+        for i in 0 ..< 20 {
             
             let texture = SKTexture(imageNamed: "button_\(i)" )
             fibby.activeTextures.append(texture)

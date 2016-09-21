@@ -35,6 +35,9 @@
 		D0F6C5D61B41922D002AF34B /* Batida2.caf in Resources */ = {isa = PBXBuildFile; fileRef = D0F6C5D51B41922D002AF34B /* Batida2.caf */; };
 		D0F6C5D81B41A3F4002AF34B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F6C5D71B41A3F4002AF34B /* GameKit.framework */; };
 		D0F6C5DA1B41B3EA002AF34B /* GameKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F6C5D91B41B3EA002AF34B /* GameKitHelper.swift */; };
+		D0F9D0DE1C187F1000840A8F /* GameTextures.atlas in Resources */ = {isa = PBXBuildFile; fileRef = D0F9D0DD1C187F1000840A8F /* GameTextures.atlas */; };
+		D0FB8D781BFB9E3C000D47DB /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0FB8D6F1BFB9E3C000D47DB /* GoogleMobileAds.framework */; };
+		D0FB8D791BFB9E3C000D47DB /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0FB8D761BFB9E3C000D47DB /* README.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,14 @@
 		D0F6C5D51B41922D002AF34B /* Batida2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Batida2.caf; path = Musicas/Batida2.caf; sourceTree = "<group>"; };
 		D0F6C5D71B41A3F4002AF34B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		D0F6C5D91B41B3EA002AF34B /* GameKitHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameKitHelper.swift; sourceTree = "<group>"; };
+		D0F9D0DD1C187F1000840A8F /* GameTextures.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GameTextures.atlas; sourceTree = "<group>"; };
+		D0FB8D6F1BFB9E3C000D47DB /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		D0FB8D711BFB9E3C000D47DB /* GADMAdNetworkAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdNetworkAdapterProtocol.h; sourceTree = "<group>"; };
+		D0FB8D721BFB9E3C000D47DB /* GADMAdNetworkConnectorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdNetworkConnectorProtocol.h; sourceTree = "<group>"; };
+		D0FB8D731BFB9E3C000D47DB /* GADMEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMEnums.h; sourceTree = "<group>"; };
+		D0FB8D741BFB9E3C000D47DB /* GADMRewardBasedVideoAdNetworkAdapterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMRewardBasedVideoAdNetworkAdapterProtocol.h; sourceTree = "<group>"; };
+		D0FB8D751BFB9E3C000D47DB /* GADMRewardBasedVideoAdNetworkConnectorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMRewardBasedVideoAdNetworkConnectorProtocol.h; sourceTree = "<group>"; };
+		D0FB8D761BFB9E3C000D47DB /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +100,7 @@
 			files = (
 				D0F6C5D81B41A3F4002AF34B /* GameKit.framework in Frameworks */,
 				D0F6C5C41B418F7D002AF34B /* AVFoundation.framework in Frameworks */,
+				D0FB8D781BFB9E3C000D47DB /* GoogleMobileAds.framework in Frameworks */,
 				D0F6BE871AF96DE100552933 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +146,7 @@
 			children = (
 				D0A08CEC1B4C099B005A948A /* Abstract.ttf */,
 				D0A08CE81B4C085B005A948A /* Arista 2.0 Alternate Light.ttf */,
+				D0FB8D6E1BFB9E3C000D47DB /* GoogleMobileAdsSdkiOS-7.5.2 */,
 				D0F6C5D71B41A3F4002AF34B /* GameKit.framework */,
 				D0F6C5C31B418F7D002AF34B /* AVFoundation.framework */,
 				D0F6BE861AF96DE100552933 /* AudioToolbox.framework */,
@@ -200,9 +213,32 @@
 			isa = PBXGroup;
 			children = (
 				D0B39D941AD84A33005925AA /* LaunchScreen.xib */,
+				D0F9D0DD1C187F1000840A8F /* GameTextures.atlas */,
 				D0B39D921AD84A33005925AA /* Images.xcassets */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		D0FB8D6E1BFB9E3C000D47DB /* GoogleMobileAdsSdkiOS-7.5.2 */ = {
+			isa = PBXGroup;
+			children = (
+				D0FB8D6F1BFB9E3C000D47DB /* GoogleMobileAds.framework */,
+				D0FB8D701BFB9E3C000D47DB /* Mediation Adapters */,
+			);
+			path = "GoogleMobileAdsSdkiOS-7.5.2";
+			sourceTree = "<group>";
+		};
+		D0FB8D701BFB9E3C000D47DB /* Mediation Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				D0FB8D711BFB9E3C000D47DB /* GADMAdNetworkAdapterProtocol.h */,
+				D0FB8D721BFB9E3C000D47DB /* GADMAdNetworkConnectorProtocol.h */,
+				D0FB8D731BFB9E3C000D47DB /* GADMEnums.h */,
+				D0FB8D741BFB9E3C000D47DB /* GADMRewardBasedVideoAdNetworkAdapterProtocol.h */,
+				D0FB8D751BFB9E3C000D47DB /* GADMRewardBasedVideoAdNetworkConnectorProtocol.h */,
+				D0FB8D761BFB9E3C000D47DB /* README.txt */,
+			);
+			path = "Mediation Adapters";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +292,7 @@
 					D0B39D811AD84A33005925AA = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 5BS7QB5JFF;
+						LastSwiftMigration = 0800;
 					};
 					D0B39D9A1AD84A33005925AA = {
 						CreatedOnToolsVersion = 6.2;
@@ -289,6 +326,8 @@
 			files = (
 				D0F6C5D61B41922D002AF34B /* Batida2.caf in Resources */,
 				D091457D1B4F3F7C00B46312 /* Tap.caf in Resources */,
+				D0FB8D791BFB9E3C000D47DB /* README.txt in Resources */,
+				D0F9D0DE1C187F1000840A8F /* GameTextures.atlas in Resources */,
 				D0A08CE91B4C085B005A948A /* Arista 2.0 Alternate Light.ttf in Resources */,
 				D0B39D961AD84A33005925AA /* LaunchScreen.xib in Resources */,
 				D0A08CED1B4C099B005A948A /* Abstract.ttf in Resources */,
@@ -455,12 +494,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-7.5.2",
+				);
 				INFOPLIST_FILE = "Beat Up/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "bepid.Beat-Up";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -470,12 +515,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-7.5.2",
+				);
 				INFOPLIST_FILE = "Beat Up/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "bepid.Beat-Up";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

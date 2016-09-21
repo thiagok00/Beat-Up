@@ -89,14 +89,14 @@ class GameScene: SKScene, FibbyDelegate {
                 if (fibby.state == States.Active) {
                     
                     fibby.clicked()
-                    score++
+                    score += 1
 
                     lastFibby = fibby
                     
                     let elapsedTime = NSDate().timeIntervalSinceDate(lastTouchDate)
                     lastTouchDate = NSDate()
                     if (elapsedTime < 0.1) {
-                        score++
+                        score += 1
                     }
                     self.updateDelay()
                     self.updateScoreLabel()
@@ -147,8 +147,8 @@ class GameScene: SKScene, FibbyDelegate {
         }
         
         
-        for var i = 0 ; i < 4 ; i++ {
-            for var j = 0 ; j < 3 ; j++ {
+        for var i = 0 ; i < 4 ; i += 1 {
+            for var j = 0 ; j < 3 ; j += 1 {
             
             
                 let fibby = Fibby.create(fibbySize, position:CGPointMake(x,y))
@@ -221,6 +221,10 @@ class GameScene: SKScene, FibbyDelegate {
     
     private func gameOver() {
  
+        let rand = Int.random(0...5)
+        if rand < 7 {
+            NSNotificationCenter.defaultCenter().postNotificationName("ShowAd", object: nil)
+        }
         let oldHighscore = dataFromUser.highscore as Int
         
         if (score > oldHighscore) {
@@ -229,7 +233,7 @@ class GameScene: SKScene, FibbyDelegate {
         }
         
         var newTotalGamesPlayed = dataFromUser.totalGamesPlayed as Int
-        newTotalGamesPlayed++
+        newTotalGamesPlayed += 1
         dataFromUser.totalGamesPlayed = newTotalGamesPlayed
         
         var newTotalScore = dataFromUser.totalScore as Int
@@ -344,7 +348,7 @@ class GameScene: SKScene, FibbyDelegate {
         var sequences = seqGenerator.generateRandomSequence()
         var duration:Double = 0.0
         
-        for (var i = 0; i < sequences.count; i++) {
+        for (var i = 0; i < sequences.count; i += 1) {
         
             if (allFibbies.count <= i) {
                 return
